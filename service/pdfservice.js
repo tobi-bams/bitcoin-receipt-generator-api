@@ -1,4 +1,3 @@
-const { text } = require("pdfkit");
 const PDFDocument = require("pdfkit");
 const transactionService = require("./transactionDetail");
 const dateService = require("./dateService");
@@ -18,8 +17,6 @@ function addHorizontalRule(doc, spaceFromEdge = 0, linesAboveAndBelow = 0.5) {
 
 async function buildPDF(res, transaction, txid) {
   try {
-    // const response = await transactionService.getTransactionDetails();
-    // console.log(response);
     const response = transaction;
     let total = response.fee;
     const doc = new PDFDocument();
