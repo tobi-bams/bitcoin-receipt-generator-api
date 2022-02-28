@@ -21,6 +21,7 @@ async function buildPDF(res, transaction, txid) {
     // const response = await transactionService.getTransactionDetails();
     // console.log(response);
     const response = transaction;
+    let total = response.fee;
     const doc = new PDFDocument();
     doc.pipe(res);
     doc.fontSize(28).text(`Bitcoin Transaction Receipt`, {
@@ -63,6 +64,7 @@ async function buildPDF(res, transaction, txid) {
       .text("Amount", { align: "right" });
     addHorizontalRule(doc, 70, 0);
     response.vout.forEach((beneficiary) => {
+      total = total + beneficiary.value;
       doc.moveDown(0.8);
       doc
         .fillColor("#B2BEB5")
@@ -93,6 +95,16 @@ async function buildPDF(res, transaction, txid) {
       });
     addHorizontalRule(doc, 70, 0);
     doc.moveDown(1);
+    doc
+      .fontSize(20)
+      .fillColor("#B2BEB5")
+      .text("Total", 70, doc.y, { lineBreak: false })
+      .fillColor("black")
+      .fontSize(20)
+      .text(`${total / 100000000} BTC`, {
+        align: "right",
+      });
+    addHorizontalRule(doc, 70, 0);
     doc.end();
   } catch (error) {
     console.log(error);
