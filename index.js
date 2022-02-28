@@ -13,6 +13,7 @@ app.use((req, res) => {
   res.status(404).json({ status: false, message: "Route not found" });
 });
 
-app.listen("5000", () => {
+let PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
   console.log("We are here");
 });
