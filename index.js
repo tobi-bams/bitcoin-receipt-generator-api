@@ -13,6 +13,6 @@ app.use((req, res) => {
   res.status(404).json({ status: false, message: "Route not found" });
 });
 
-app.listen("6000", () => {
+app.listen("5000", () => {
   console.log("We are here");
 });

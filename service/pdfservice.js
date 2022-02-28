@@ -16,7 +16,7 @@ function addHorizontalRule(doc, spaceFromEdge = 0, linesAboveAndBelow = 0.5) {
   return doc;
 }
 
-async function buildPDF(res, transaction) {
+async function buildPDF(res, transaction, txid) {
   try {
     // const response = await transactionService.getTransactionDetails();
     // console.log(response);
@@ -51,10 +51,7 @@ async function buildPDF(res, transaction) {
       .text("Transaction ID", 70, doc.y, { lineBreak: false })
       .fillColor("black")
       .fontSize(15)
-      .text(
-        "c4978bfc9b4cd632fb37eb5f69c7c686ae364d9cb1b32ec01c0f8bae72530a4e",
-        { align: "right" }
-      );
+      .text(txid, { align: "right" });
     addHorizontalRule(doc, 70, 0.4);
     doc.moveDown(1);
     doc
